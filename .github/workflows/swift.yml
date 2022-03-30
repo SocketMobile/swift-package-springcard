@@ -1,0 +1,19 @@
+name: Swift
+
+on:
+  push:
+    branches: [ master, develop ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Resolve dependencies
+      run: xcodebuild -resolvePackageDependencies
+    - name: Build
+      run: xcodebuild -project SpringCard.xcodeproj -scheme SpringCard-Package -configuration Release
